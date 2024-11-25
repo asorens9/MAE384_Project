@@ -1,20 +1,19 @@
-The project will focus on modeling the spread of an infectious disease using the SIR model (Susceptible-
-Infected-Recovered). The SIR model contains a set of ordinary differential equations (ODEs) that describe
-how individuals in a population transition between three states: susceptible, infected, and recovered.
-The goal of this project is to provide students with a deeper understanding of how numerical methods are
-applied to solve real-world problems in epidemiology. By simulating the spread of infectious diseases using
-the SIR model, students will explore how mathematical equations can predict epidemic dynamics and inform
-public health decisions. Through the integration of solving ODEs, interpolation, data fitting, and spectral
-analysis, students will gain practical experience with tools that bridge theory and application, empowering
-them to tackle interdisciplinary challenges in science and engineering.
-The project will integrate the following topics:
-1. Numerical solution of the ODE systems.
-2. Interpolation.
-3. Least Squares.
-4. Fourier Analysis.
-Project Preparation and Submission
-The students will work in the groups of four. The students are to divide the work equally between the team
-members. All programming need to be done in MATLAB. Built-in MATLAB functions for ODE solution,
-least square sand interpolation can not be used in this project. All programs need to be self-written. The
-students can use built-in MATLAB fft function for Fourier analysis. The project needs to be created and
-managed in GitHub. Please, see the instructions on how to use GitHub posted on Canvas.
+In this project, we focused on modeling the spread of infectious diseases using the SIR model (Susceptible-Infected-Recovered). The SIR model is a system of ordinary differential equations (ODEs) that describes how individuals move between three states: susceptible (those who can become infected), infected (currently carrying the disease), and recovered (no longer infectious). Our goal was to understand how numerical methods can be applied to solve real-world problems in epidemiology, specifically using the SIR model to simulate and analyze the spread of diseases.
+
+Through this project, we explored how mathematical equations help predict the dynamics of an epidemic and inform public health strategies. Along the way, we applied techniques such as solving ODEs numerically, performing interpolation, fitting data using least squares, and conducting Fourier analysis. This combination of methods gave us hands-on experience bridging mathematical theory with real-world applications, preparing us to address interdisciplinary challenges in science and engineering.
+
+Here’s a breakdown of the tasks and how we approached them:
+
+Numerical Solution of ODE Systems
+
+We implemented numerical methods (like the 4th-order Runge-Kutta method) to solve the SIR model equations.
+These equations described how the populations in the susceptible, infected, and recovered compartments changed over time.
+Interpolation
+
+Using interpolation, we estimated values between known data points to better understand the trends in the disease dynamics.
+Least Squares
+
+This technique allowed us to fit models to data, minimizing the differences between the predicted and actual values, which helped refine our simulation.
+Fourier Analysis
+
+Using Fourier transforms, we analyzed frequency components in the data, which could provide insights into periodic patterns in epidemic waves.
