@@ -1,0 +1,81 @@
+clear all; close all; clc;
+
+% Initial conditions
+S0 = 990; I0 = 10; R0 = 0; N = S0 + I0 + R0;
+h = 1; T = 100;
+
+% Parameter sets
+params = [
+    0.3, 0.1; % Seasonal Influenza
+    1.0, 0.1; % COVID-19
+    2.0, 0.2  % Measles
+];
+
+% Solve and plot for each (beta, gamma)
+for i = 1:size(params, 1)
+    beta = params(i, 1);
+    gamma = params(i, 2);
+    [t, S, I, R] = sir_rk4(S0, I0, R0, beta, gamma, N, h, T);
+    
+    % Plot results
+    figure;
+    plot(t, S, 'b-', 'DisplayName', 'Susceptible');
+    hold on;
+    plot(t, I, 'r-', 'DisplayName', 'Infected');
+    plot(t, R, 'g-', 'DisplayName', 'Recovered');
+    title(sprintf('SIR Model (\\beta = %.1f, \\gamma = %.1f)', beta, gamma));
+    xlabel('Time (days)');
+    ylabel('Population');
+    legend; grid on;
+end
+
+
+function [t, S, I, R] = sir_rk4(S0, I0, R0, beta, gamma, N, h, T)
+    % Time vector
+    t = 0:h:T;
+    n_steps = length(t);
+    
+    % Initialize variables
+    S = zeros(1, n_steps);
+    I = zeros(1, n_steps);
+    R = zeros(1, n_steps);
+    
+    % Set initial conditions
+    S(1) = S0;
+    I(1) = I0;
+    R(1) = R0;
+    
+    % RK4 Method
+    for i = 1:n_steps-1
+        % Define functions for derivatives
+        dS = @(S, I) -beta * S * I / N;
+        dI = @(S, I) (beta * S * I / N) - gamma * I;
+        dR = @(I) gamma * I;
+        
+        % k1
+        k1S = h * dS(S(i), I(i));
+        k1I = h * dI(S(i), I(i));
+        k1R = h * dR(I(i));
+        
+        % k2
+        k2S = h * dS(S(i) + k1S/2, I(i) + k1I/2);
+        k2I = h * dI(S(i) + k1S/2, I(i) + k1I/2);
+        k2R = h * dR(I(i) + k1I/2);
+        
+        % k3
+        k3S = h * dS(S(i) + k2S/2, I(i) + k2I/2);
+        k3I = h * dI(S(i) + k2S/2, I(i) + k2I/2);
+        k3R = h * dR(I(i) + k2I/2);
+        
+        % k4
+        k4S = h * dS(S(i) + k3S, I(i) + k3I);
+        k4I = h * dI(S(i) + k3S, I(i) + k3I);
+        k4R = h * dR(I(i) + k3I);
+        
+        % Update
+        S(i+1) = S(i) + (k1S + 2*k2S + 2*k3S + k4S) / 6;
+        I(i+1) = I(i) + (k1I + 2*k2I + 2*k3I + k4I) / 6;
+        R(i+1) = R(i) + (k1R + 2*k2R + 2*k3R + k4R) / 6;
+    end
+end
+
