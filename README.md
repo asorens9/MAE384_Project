@@ -8,12 +8,15 @@ Numerical Solution of ODE Systems
 
 We implemented numerical methods (like the 4th-order Runge-Kutta method) to solve the SIR model equations.
 These equations described how the populations in the susceptible, infected, and recovered compartments changed over time.
+
 Interpolation
 
 Using interpolation, we estimated values between known data points to better understand the trends in the disease dynamics.
+
 Least Squares
 
 This technique allowed us to fit models to data, minimizing the differences between the predicted and actual values, which helped refine our simulation.
+
 Fourier Analysis
 
 Using Fourier transforms, we analyzed frequency components in the data, which could provide insights into periodic patterns in epidemic waves.
